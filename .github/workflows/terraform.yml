@@ -14,11 +14,15 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Download Dockers Image URL
+      - name: Download Docker Image URL
         uses: actions/download-artifact@v2
         with:
           name: docker-image-url
-          path: .
+          path: "${{ github.workspace }}/Skipify/src/deidentify"  # Update the path
+
+      - name: Print Downloaded Contents
+        run: |
+          ls -R "${{ github.workspace }}/Skipify/src/deidentify"
 
       - name: Get Docker Image URL
         id: get-image-url
