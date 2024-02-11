@@ -34,5 +34,5 @@ jobs:
 
       - name: Push Docker image to GCR
         run: |
-          docker tag first-gowtham gcr.io/stovlsandboxnew-399705/firstimage:${{ github.sha }}
+          docker tag first-gowtham gcr.io/stovlsandboxnew-399705/firstgowtham:${{ github.sha }}
           docker push gcr.io/stovlsandboxnew-399705/firstgowtham:${{ github.sha }}
