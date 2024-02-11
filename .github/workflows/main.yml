@@ -37,3 +37,10 @@ jobs:
           docker tag first-gowtham gcr.io/stovlsandboxnew-399705/firstgowtham:${{ github.sha }}
           gcloud auth configure-docker
           docker push gcr.io/stovlsandboxnew-399705/firstgowtham:${{ github.sha }}
+
+      - name: Upload Docker Image URL as Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: docker-image-url
+          path: /home/runner/work/github-actions/github-actions/Skipify/src/deidentify
+
