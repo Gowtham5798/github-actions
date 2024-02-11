@@ -22,7 +22,9 @@ jobs:
 
       - name: Get Docker Image URL
         id: get-image-url
-        run: echo "IMAGE_URL=$(cat docker-image-url/IMAGE_URL)"
+        run: |
+          echo "IMAGE_URL=$(cat docker-image-url/IMAGE_URL)"
+          echo "Retrieved Image URL: $IMAGE_URL"  # Print to workflow log
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
