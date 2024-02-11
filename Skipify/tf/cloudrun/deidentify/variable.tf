@@ -1,5 +1,5 @@
 variable "project" {
-  default = "skipify-demo"
+  default = "stovlsandboxnew-399705"
 }
 
 variable "region" {
@@ -11,7 +11,7 @@ variable "name" {
 }
 
 variable "image" {
-  default = "gcr.io/skipify-demo/my-cloudrun02"
+  default = "gcr.io/stovlsandboxnew-399705/firstgowtham"
 }
 
 variable "container_port" {
