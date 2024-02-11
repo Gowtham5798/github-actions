@@ -16,7 +16,7 @@ jobs:
       run: |
         ls
         pwd 
-        cd /home/runner/work/github-actions/github-actions/Skipify/tf/cloudrun
+        cd /home/runner/work/github-actions/github-actions/Skipify/tf/cloudrun/deidentify
 
 
     # Authentication via credentials json
@@ -46,11 +46,11 @@ jobs:
 
     - name: Terraform Plan
       run: |
-        cd /home/runner/work/github-actions/github-actions/Skipify/tf/cloudrun
+        cd /home/runner/work/github-actions/github-actions/Skipify/tf/cloudrun/deidentify
         ls
         terraform plan
 
     - name: Terraform Apply
       run: |
-        cd /home/runner/work/github-actions/github-actions/Skipify/tf/cloudrun
+        cd /home/runner/work/github-actions/github-actions/Skipify/tf/cloudrun/deidentify
         terraform apply -auto-approve
