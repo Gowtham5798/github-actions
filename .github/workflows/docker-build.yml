@@ -1,44 +1,37 @@
 name: Build and push image to GCR
 
-
 on:
   push:
     branches:
       - main
-
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Check out code
-      uses: actions/checkout@v2
+      - name: Check out code
+        uses: actions/checkout@v2
 
+      - name: Checking path
+        run: |
+          ls
+          pwd 
+          cd "${{ github.workspace }}/Skipify/src/deidentify"
 
-    - name: Checking path
-      run: |
-        ls
-        pwd 
-        cd /home/runner/work/github-actions/github-actions/Skipify/src/deidentify
-    
-    - name: Building Docker image
-      run: |
-        cd /home/runner/work/github-actions/github-actions/Skipify/src/deidentify
-        docker build -t first .
+      - name: Build Docker image
+        id: build-image
+        run: |
+          docker build -t first .
+          echo "IMAGE_URL=gcr.io/stovlsandboxnew-399705/vidya-sanu:${{ github.sha }}" >> $GITHUB_ENV
 
+      - name: Authenticate with GCR
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.CLOUDRUN_GCP }}'
 
-
-    # Authentication via credentials json
-    - id: 'auth'
-      uses: 'google-github-actions/auth@v2'
-      with:
-        credentials_json: '${{ secrets.CLOUDRUN_GCP }}'
-
-
-      # Pushing  the Docker image to GCE
-    - name: Deploy
-      run: |-
-        docker tag first gcr.io/stovlsandboxnew-399705/firstimage
-        gcloud auth configure-docker
-        docker push gcr.io/stovlsandboxnew-399705/firstimage
+      - name: Push Docker image to GCR
+        run: |
+          docker tag first gcr.io/stovlsandboxnew-399705/vidya-sanu:${{ github.sha }}
+          docker push gcr.io/stovlsandboxnew-399705/vidya-sanu:${{ github.sha }}
