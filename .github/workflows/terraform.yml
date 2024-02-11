@@ -29,7 +29,7 @@ jobs:
       run: |
         ls
         pwd 
-        cd /home/runner/work/github-actions/github-actions/Skipify/tf/cloudrun
+        cd /home/runner/work/github-actions/github-actions/Skipify/tf/cloudrun/deidentify
         ls
 
     - name: Set up Terraform
@@ -40,7 +40,7 @@ jobs:
     - name: Initialize Terraform
       run: |
         pwd
-        cd /home/runner/work/github-actions/github-actions/Skipify/tf/cloudrun
+        cd /home/runner/work/github-actions/github-actions/Skipify/tf/cloudrun/deidentify
         ls
         terraform init
 
