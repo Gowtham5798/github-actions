@@ -22,8 +22,8 @@ jobs:
       - name: Build Docker image
         id: build-image
         run: |
-          docker build -t first .
-          echo "IMAGE_URL=gcr.io/stovlsandboxnew-399705/vidya-sanu:${{ github.sha }}" >> $GITHUB_ENV
+          docker build -t first -f Dockerfile .
+          echo "IMAGE_URL=gcr.io/stovlsandboxnew-399705/firstimage:${{ github.sha }}" >> $GITHUB_ENV
 
       - name: Authenticate with GCR
         id: auth
@@ -33,5 +33,5 @@ jobs:
 
       - name: Push Docker image to GCR
         run: |
-          docker tag first gcr.io/stovlsandboxnew-399705/vidya-sanu:${{ github.sha }}
-          docker push gcr.io/stovlsandboxnew-399705/vidya-sanu:${{ github.sha }}
+          docker tag first gcr.io/stovlsandboxnew-399705/firstimage:${{ github.sha }}
+          docker push gcr.io/stovlsandboxnew-399705/firstimage:${{ github.sha }}
