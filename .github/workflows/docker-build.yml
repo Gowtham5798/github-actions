@@ -17,7 +17,7 @@ jobs:
         run: |
           ls
           pwd 
-          cd "${{ github.workspace }}/Skipify/src/deidentify"
+          cd /home/runner/work/test-actions/test-actions/Skipify/src/deidentify
 
       - name: Build Docker image
         id: build-image
