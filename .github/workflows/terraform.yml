@@ -20,13 +20,13 @@ jobs:
 
       - name: List Contents of Downloaded Directory
         run: |
-          ls -R "${{ github.workspace }}/downloaded-artifacts"
+          ls -R "${{ github.workspace }}/Skipify/src/deidentify"
 
       - name: Download Docker Image URL
         uses: actions/download-artifact@v2
         with:
           name: docker-image-url
-          path: "${{ github.workspace }}/downloaded-artifacts"
+          path: "${{ github.workspace }}/Skipify/src/deidentify"
 
       - name: Get Docker Image URL
         id: get-image-url
