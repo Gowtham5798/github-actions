@@ -3,7 +3,7 @@ name: Build and push image to GCR
 on:
   push:
     branches:
-      //- main
+      - main
 
 jobs:
   build-and-push:
