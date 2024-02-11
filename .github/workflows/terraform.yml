@@ -14,16 +14,24 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: List Contents of Source Directory
+        run: |
+          ls -R "${{ github.workspace }}/Skipify/src/deidentify"
+
+      - name: List Contents of Downloaded Directory
+        run: |
+          ls -R "${{ github.workspace }}/downloaded-artifacts"
+
       - name: Download Docker Image URL
         uses: actions/download-artifact@v2
         with:
           name: docker-image-url
-          path: /home/runner/work/github-actions/github-actions/Skipify/src/deidentify
+          path: "${{ github.workspace }}/downloaded-artifacts"
 
       - name: Get Docker Image URL
         id: get-image-url
         run: |
-          echo "IMAGE_URL=$(cat docker-image-url/IMAGE_URL)"
+          echo "IMAGE_URL=$(cat downloaded-artifacts/IMAGE_URL)"
           echo "Retrieved Image URL: $IMAGE_URL"  # Print to workflow log
 
       - name: Set up Terraform
