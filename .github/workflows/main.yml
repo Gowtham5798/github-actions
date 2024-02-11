@@ -25,6 +25,12 @@ jobs:
           cd "${{ github.workspace }}/Skipify/src/deidentify"
           docker build -t first-gowtham .
           echo "IMAGE_URL=gcr.io/stovlsandboxnew-399705/firstgowtham:${{ github.sha }}" >> $GITHUB_ENV
+          
+      - name: Upload Docker Image URL as Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: docker-image-url
+          path: /home/runner/work/github-actions/github-actions/Skipify/src/deidentify
 
       - name: Authenticate with GCR
         id: auth
@@ -38,9 +44,5 @@ jobs:
           gcloud auth configure-docker
           docker push gcr.io/stovlsandboxnew-399705/firstgowtham:${{ github.sha }}
 
-      - name: Upload Docker Image URL as Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: docker-image-url
-          path: /home/runner/work/github-actions/github-actions/Skipify/src/deidentify
+      
 
