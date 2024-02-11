@@ -18,11 +18,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: docker-image-url
-          path: "${{ github.workspace }}/Skipify/src/deidentify"  # Update the path
-
-      - name: Print Downloaded Contents
-        run: |
-          ls -R "${{ github.workspace }}/Skipify/src/deidentify"
+          path: /home/runner/work/github-actions/github-actions/Skipify/src/deidentify
 
       - name: Get Docker Image URL
         id: get-image-url
