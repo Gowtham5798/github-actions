@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = "cloudrun-demo-dlp"
+    bucket = "cloudrun-backend"
     prefix = "terraform/state"
   }
 }
