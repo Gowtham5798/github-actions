@@ -15,6 +15,7 @@ resource "google_cloud_run_service" "cloudrun-reidentify" {
           container_port = var.container_port  
         }
       }
+    service_account_name = "test-vidya-cloudrun@stovlsandboxnew-399705.iam.gserviceaccount.com"
     }
   }
 
