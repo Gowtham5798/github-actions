@@ -1,57 +1,56 @@
-name: Deploy Cloud Run with Terraform
+name: Deploy to cloud run via terraform
 
 on:
-  workflow_run:
-    workflows: ["Build and push image to GCR"]
-    types:
-      - completed
+  push:
+    branches:
+      - main
 
 jobs:
-  deploy_cloud_run:
+  build-and-push:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+    - name: Check out code
+      uses: actions/checkout@v2
 
-      - name: List Contents of Source Directory
-        run: |
-          ls -R "${{ github.workspace }}/Skipify/src/deidentify"
+    - name: Checking path
+      run: |
+        ls
+        pwd 
+        cd /home/runner/work/test-actions/test-actions/Skipify/tf/cloudrun
 
-      - name: List Contents of Downloaded Directory
-        run: |
-          ls -R "${{ github.workspace }}/Skipify/src/deidentify"
 
-      - name: Download Docker Image URL
-        uses: actions/download-artifact@v2
-        with:
-          name: docker-image-url
-          path: "${{ github.workspace }}/Skipify/src/deidentify"
+    # Authentication via credentials json
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v2'
+      with:
+        credentials_json: '${{ secrets.CLOUDRUN_GCP }}'
 
-      - name: Get Docker Image URL
-        id: get-image-url
-        run: |
-          echo "IMAGE_URL=$(cat downloaded-artifacts/IMAGE_URL)"
-          echo "Retrieved Image URL: $IMAGE_URL"  # Print to workflow log
+    - name: Checking path
+      run: |
+        ls
+        pwd 
+        cd /home/runner/work/test-actions/test-actions/Skipify/tf/cloudrun/deidentify
+        ls
 
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v1
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 1.0.0
 
-      - name: Initialize Terraform
-        run: |
-          pwd
-          cd "${{ github.workspace }}/Skipify/tf/cloudrun/deidentify"
-          ls
-          terraform init
+    - name: Initialize Terraform
+      run: |
+        pwd
+        cd /home/runner/work/test-actions/test-actions/Skipify/tf/cloudrun/deidentify
+        ls
+        terraform init
 
-      - name: Terraform Plan
-        run: |
-          cd "${{ github.workspace }}/Skipify/tf/cloudrun/deidentify"
-          ls
-          terraform plan
+    - name: Terraform Plan
+      run: |
+        cd /home/runner/work/test-actions/test-actions/Skipify/tf/cloudrun/deidentify
+        ls
+        terraform plan
 
-      - name: Terraform Apply
-        run: |
-          cd "${{ github.workspace }}/Skipify/tf/cloudrun/deidentify"
-          # Use the IMAGE_URL variable retrieved from the artifact
-          terraform apply -auto-approve -var="image_url=${{ steps.get-image-url.outputs.IMAGE_URL }}"
+    - name: Terraform Apply
+      run: |
+        cd /home/runner/work/test-actions/test-actions/Skipify/tf/cloudrun/deidentify
+        terraform apply -auto-approve
