@@ -25,6 +25,12 @@ jobs:
           cd "${{ github.workspace }}/Skipify/src/deidentify"
           docker build -t first-gowtham .
           echo "IMAGE_URL=gcr.io/stovlsandboxnew-399705/firstgowtham:${{ github.sha }}" >> $GITHUB_ENV
+
+      - name: Set Image URL
+        run: |
+          IMAGE_URL=gcr.io/stovlsandboxnew-399705/firstgowtham:${{ github.sha }}
+          echo "IMAGE_URL=${IMAGE_URL}" >> $GITHUB_ENV
+          echo "Image URL: ${IMAGE_URL}"  # Print to workflow log
           
       - name: Upload Docker Image URL as Artifact
         uses: actions/upload-artifact@v2
@@ -43,6 +49,3 @@ jobs:
           docker tag first-gowtham gcr.io/stovlsandboxnew-399705/firstgowtham:${{ github.sha }}
           gcloud auth configure-docker
           docker push gcr.io/stovlsandboxnew-399705/firstgowtham:${{ github.sha }}
-
-      
-
