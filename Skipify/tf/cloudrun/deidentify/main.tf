@@ -1,5 +1,5 @@
 provider "google" {
-  project     = "skipify-demo"                                    # Replace with your Google Cloud project ID
+  project     = var.project                                    # Replace with your Google Cloud project ID
   region      = var.region                                     # Replace with your desired region
 }
 
