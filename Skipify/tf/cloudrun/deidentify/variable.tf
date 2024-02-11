@@ -11,7 +11,7 @@ variable "name" {
 }
 
 variable "image" {
-  default = "gcr.io/stovlsandboxnew-399705/firstgowtham"
+  default = "gcr.io/stovlsandboxnew-399705/cloudrun_image"
 }
 
 variable "container_port" {
